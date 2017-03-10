@@ -106,10 +106,10 @@ exports['default'] = function (_ref4) {
   var xmax = maxX == null ? (0, _ops.maxBy)(arranged, function (d) {
     return d.xmax;
   }) : maxX;
-  var ymin = min == null ? (0, _ops.minBy)(arranged, function (d) {
+  var ymin = minY == null ? (0, _ops.minBy)(arranged, function (d) {
     return d.ymin;
   }) : minY;
-  var ymax = max == null ? (0, _ops.maxBy)(arranged, function (d) {
+  var ymax = maxY == null ? (0, _ops.maxBy)(arranged, function (d) {
     return d.ymax;
   }) : maxY;
   if (closed) {
