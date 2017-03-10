@@ -23,16 +23,16 @@ let box = (datum, accessor, sort) => {
   }
 }
 
-export default function({data, xaccessor, yaccessor, width, height, closed, min, max, sort = true}) {
+export default function({data, xaccessor, yaccessor, width, height, closed, minX, maxX, minY, maxY, sort = true}) {
   if (! xaccessor) { xaccessor = ([x, y]) => x }
   if (! yaccessor) { yaccessor = ([x, y]) => y }
   let f = (i) => [xaccessor(i), yaccessor(i)]
   let arranged = data.map((datum) => box(datum, f, sort))
 
-  let xmin = minBy(arranged, (d) => d.xmin)
-  let xmax = maxBy(arranged, (d) => d.xmax)
-  let ymin = (min == null) ? minBy(arranged, (d) => d.ymin) : min
-  let ymax = (max == null) ? maxBy(arranged, (d) => d.ymax) : max
+  let xmin = (minX == null) ? minBy(arranged, (d) => d.xmin) : minX
+  let xmax = (maxX == null) ? maxBy(arranged, (d) => d.xmax) : maxX
+  let ymin = (minY == null) ? minBy(arranged, (d) => d.ymin) : minY
+  let ymax = (maxY == null) ? maxBy(arranged, (d) => d.ymax) : maxY
   if (closed) {
     ymin = Math.min(ymin, 0)
     ymax = Math.max(ymax, 0)
