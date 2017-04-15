@@ -35,13 +35,28 @@ exports['default'] = function (options) {
     var points = _ref.points;
     var xmin = _ref.xmin;
     var xmax = _ref.xmax;
+    var ymin = _ref.ymin;
+    var ymax = _ref.ymax;
 
     var scaledPoints = points.map(scale);
     i += 1;
     var line = (0, _bezier2['default'])({ points: scaledPoints });
     var area = {
-      path: (_line$path$lineto = (_line$path = line.path).lineto.apply(_line$path, _toConsumableArray(scale([xmax, base])))).lineto.apply(_line$path$lineto, _toConsumableArray(scale([xmin, base]))).closepath(),
-      centroid: (0, _ops.average)([line.centroid, scale([xmin, base]), scale([xmax, base])])
+      path: (_line$path$lineto = (_line$path = line.path)
+      .lineto
+      .apply(_line$path, _toConsumableArray(scale([xmax, base]))))
+      .lineto
+      .apply(_line$path$lineto, _toConsumableArray(scale([xmin, base])))
+      .lineto
+      .apply(_line$path$lineto, _toConsumableArray(scale([ymin, base])))
+      .lineto
+      .apply(_line$path$lineto, _toConsumableArray(scale([ymax, base])))
+      .closepath(),
+      centroid: (0, _ops.average)([line.centroid,
+        scale([xmin, base]),
+        scale([xmax, base]),
+        scale([ymin, base]),
+        scale([ymax, base])])
     };
 
     return (0, _ops.enhance)(options.compute, {
